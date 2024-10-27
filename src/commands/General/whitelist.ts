@@ -27,17 +27,24 @@ export async function run({ interaction, client, handler }: SlashCommandProps) {
 
   const whitelistData = JSON.parse(whitelistJson);
 
-  whitelistData.push({
-    uuid: await (await minecraftPlayer(username)).uuid,
-    name: username,
-  });
+  try {
+    const playerData = await minecraftPlayer(username);
+    whitelistData.push({
+      uuid: playerData.uuid,
+      name: username,
+    });
+  } catch (error) {
+    console.error("Fehler beim Abrufen des Minecraft-Spielers: ", username);
+    interaction.reply("Fehler beim Abrufen des Minecraft-Spielers: " + username + "! ❌");
+    return
+  }
 
   fs.writeFile(
     __dirname + "/../../whitelist.json",
     JSON.stringify(whitelistData)
   );
 
-  interaction.reply("Data:" + whitelistJson);
+  interaction.reply(username + "! ✅");
 }
 
 export const options: CommandOptions = {};
