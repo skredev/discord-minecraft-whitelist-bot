@@ -1,18 +1,26 @@
-import process from 'node:process';
-import { URL } from 'node:url';
-import { Client, GatewayIntentBits } from 'discord.js';
-import { loadCommands, loadEvents } from './util/loaders.js';
-import { registerEvents } from './util/registerEvents.js';
+import 'dotenv/config';
 
-// Initialize the client
-const client = new Client({ intents: [GatewayIntentBits.Guilds] });
+import { Client, IntentsBitField } from 'discord.js';
+import { CommandKit } from 'commandkit';
 
-// Load the events and commands
-const events = await loadEvents(new URL('events/', import.meta.url));
-const commands = await loadCommands(new URL('commands/', import.meta.url));
+import { join, dirname } from 'node:path';
+import { fileURLToPath } from 'node:url';
 
-// Register the event handlers
-registerEvents(commands, events, client);
+const __dirname = dirname(fileURLToPath(import.meta.url));
 
-// Login to the client
-void client.login(process.env.DISCORD_TOKEN);
+const client = new Client({
+  intents: [
+    IntentsBitField.Flags.Guilds,
+    IntentsBitField.Flags.GuildMembers,
+    IntentsBitField.Flags.GuildMessages,
+    IntentsBitField.Flags.MessageContent,
+  ],
+});
+
+new CommandKit({
+  client,
+  eventsPath: join(__dirname, 'events'),
+  commandsPath: join(__dirname, 'commands'),
+});
+
+client.login(process.env.TOKEN);

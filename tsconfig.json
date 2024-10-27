@@ -1,13 +1,20 @@
 {
-	"$schema": "https://json.schemastore.org/tsconfig.json",
-	"extends": ["@sapphire/ts-config", "@sapphire/ts-config/extra-strict"],
-	"compilerOptions": {
-		"declaration": false,
-		"declarationMap": false,
-		"module": "NodeNext",
-		"moduleResolution": "NodeNext",
-		"target": "ESNext",
-		"outDir": "dist",
-		"skipLibCheck": true
-	}
+  "$schema": "https://json.schemastore.org/tsconfig",
+  "compilerOptions": {
+    "lib": ["ES2022"],
+    "target": "ES2022",
+    "moduleResolution": "Bundler",
+    "module": "ES2022",
+    "esModuleInterop": true,
+    "resolveJsonModule": true,
+    "skipLibCheck": true,
+    "noUncheckedIndexedAccess": true,
+    "removeComments": true,
+    "allowJs": true,
+    "strict": true,
+    "noEmit": true,
+    "declaration": false
+  },
+  "include": ["src"],
+  "exclude": ["dist", "node_modules", ".commandkit"]
 }
