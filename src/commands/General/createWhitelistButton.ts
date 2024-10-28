@@ -13,7 +13,7 @@ import type {
 } from "commandkit";
 
 export const data = new SlashCommandBuilder()
-  .setName("createbutton")
+  .setName("create-whitelist-button")
   .setDescription("Create the whitelist Button")
   .addStringOption((option) =>
     option
