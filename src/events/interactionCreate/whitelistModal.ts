@@ -6,11 +6,13 @@ import { Rcon } from "rcon-client";
 export default async function (interaction: Interaction) {
   if (
     !interaction.isModalSubmit() ||
-    interaction.customId !== "whitelist-modal"
+    interaction.customId !== "whitelist-modal" ||
+    !interaction.guild
   )
     return;
 
-  const { RCON_IP, RCON_PORT, RCON_PASSWORD } = process.env;
+  const { RCON_IP, RCON_PORT, RCON_PASSWORD, WHITELIST_ROLE_ID } = process.env;
+
   if (!RCON_IP || !RCON_PORT || !RCON_PASSWORD) {
     console.error("RCON environment variables are missing");
     return;
@@ -41,6 +43,29 @@ export default async function (interaction: Interaction) {
           content: "``" + usernameInput + "`` \u2705",
           ephemeral: true,
         });
+
+        if (WHITELIST_ROLE_ID) {
+          const whitelistRole = interaction.guild.roles.cache.find(
+            (role) => role.id === WHITELIST_ROLE_ID
+          );
+          if (whitelistRole) {
+            const member = await interaction.guild.members.fetch(
+              interaction.user.id
+            );
+
+            try {
+              await member.roles.add(whitelistRole);
+              console.log("Added role to user: " + member.displayName);
+            } catch (error) {
+              console.error("Error adding role:", error);
+              await interaction.reply(
+                "There was an error adding the role. Please try again later."
+              );
+            }
+          } else {
+            console.error("Whitelist role not found.");
+          }
+        }
       } else if (response.includes("Player is already whitelisted")) {
         console.log("RCON Response: " + response);
         await interaction.reply({
