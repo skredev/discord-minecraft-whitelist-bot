@@ -48,11 +48,11 @@ RCON_PASSWORD=""
 WHITELIST_ROLE_ID=""
 ```
 
-- TOKEN: Your Discord bot token.
-- RCON_IP: The IP address of your Minecraft server.
-- RCON_PORT: The RCON port (default is usually 25575).
-- RCON_PASSWORD: The password for RCON access.
-- WHITELIST_ROLE_ID: The role ID for the whitelist role to be added to users.
+- **TOKEN:** Your Discord bot token.
+- **RCON_IP:** The IP address of your Minecraft server.
+- **RCON_PORT:** The RCON port (default is usually 25575).
+- **RCON_PASSWORD:** The password for RCON access.
+- **WHITELIST_ROLE_ID:** The role ID for the whitelist role to be added to users.
   
 > You must first enable RCON in the server.properties file of your Minecraft Server and set a password
 
