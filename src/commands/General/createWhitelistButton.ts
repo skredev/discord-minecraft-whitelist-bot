@@ -7,7 +7,6 @@ import {
 } from "discord.js";
 
 import type {
-  CommandData,
   SlashCommandProps,
   CommandOptions,
 } from "commandkit";
@@ -54,6 +53,11 @@ export async function run({ interaction, client, handler }: SlashCommandProps) {
   const message = await interaction.channel.send({
     embeds: [Embed],
     components: [buttonRow],
+  });
+
+  await interaction.reply({
+    content: "Successful creation of the whitelist button",
+    ephemeral: true,
   });
 }
 
