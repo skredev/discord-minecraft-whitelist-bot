@@ -1,48 +1,62 @@
-import 'dotenv/config';
+import "dotenv/config";
 
 import type { Interaction } from "discord.js";
-import minecraftPlayer from "minecraft-player";
-import { promises as fs } from "fs";
-import { join } from "path";
-
-const whitelistPath = join(__dirname, `${process.env.WHITELIST_PATH}`);
+import { Rcon } from "rcon-client";
 
 export default async function (interaction: Interaction) {
-  if (!interaction.isModalSubmit()) return;
+  if (
+    !interaction.isModalSubmit() ||
+    interaction.customId !== "whitelist-modal"
+  )
+    return;
 
-  const usernameInput = interaction.fields.getTextInputValue("usernameInput");
-  const whitelistData = JSON.parse(await fs.readFile(whitelistPath, "utf8"));
-
-  try {
-    const playerData = await minecraftPlayer(usernameInput);
-    whitelistData.push({
-      uuid: playerData.uuid,
-      name: usernameInput,
-    });
-  } catch (error) {
-    console.error(
-      "Fehler beim Abrufen des Minecraft-Spielers: ",
-      usernameInput
-    );
-    console.log(whitelistPath)
-    interaction.reply(
-      "Fehler beim Abrufen des Minecraft-Spielers: " +
-        usernameInput +
-        "! \u274C"
-    );
+  const { RCON_IP, RCON_PORT, RCON_PASSWORD } = process.env;
+  if (!RCON_IP || !RCON_PORT || !RCON_PASSWORD) {
+    console.error("RCON environment variables are missing");
     return;
   }
 
   try {
-    await fs.writeFile(whitelistPath, JSON.stringify(whitelistData));
-    interaction.reply(usernameInput + "! \u2705");
-    console.log(usernameInput + " added to whitelist");
+    const rcon = await Rcon.connect({
+      host: RCON_IP,
+      port: Number(RCON_PORT),
+      password: RCON_PASSWORD,
+    });
+    console.info("RCON connection successfully established.");
 
-    setTimeout(() => interaction.deleteReply(), 3000);
+    const usernameInput = interaction.fields.getTextInputValue("usernameInput");
+
+    try {
+      const response = await rcon.send("whitelist add " + usernameInput);
+
+      if (response.includes("That player does not exist")) {
+        console.log("RCON Response: " + response);
+        await interaction.reply({
+          content: "``That player does not exist!`` \u274C",
+          ephemeral: true,
+        });
+      } else if (response.includes("Added")) {
+        console.log("RCON Response: " + response);
+        await interaction.reply({
+          content: "``" + usernameInput + "`` \u2705",
+          ephemeral: true,
+        });
+      } else if (response.includes("Player is already whitelisted")) {
+        console.log("RCON Response: " + response);
+        await interaction.reply({
+          content: "``Player is already whitelisted!`` \u274C",
+          ephemeral: true,
+        });
+      } else {
+        console.log("Unbekannte Antwort vom Server: ", response);
+      }
+    } catch (error) {
+      console.error("Error sending the command: ", error);
+    } finally {
+      rcon.end();
+    }
   } catch (error) {
-    console.error("Fehler beim Schreiben in die Datei: ", error);
-    interaction.editReply(
-      "Fehler beim Aktualisieren der Whitelist-Datei! \u274C"
-    );
+    console.error("Error while establishing the RCON connection: ", error);
+    return;
   }
 }

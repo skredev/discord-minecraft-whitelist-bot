@@ -15,6 +15,7 @@
     "commandkit": "^0.1.10",
     "discord.js": "^14.16.3",
     "dotenv": "^16.4.5",
-    "minecraft-player": "^1.0.1"
+    "minecraft-player": "^1.0.1",
+    "rcon-client": "^4.2.5"
   }
 }

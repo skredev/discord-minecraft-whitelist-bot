@@ -12,7 +12,7 @@ export default async function (
   if (!interaction.isButton()) return;
 
   const modal = new ModalBuilder()
-    .setCustomId("whitelistmodal")
+    .setCustomId("whitelist-modal")
     .setTitle("Whitelist");
 
   const usernameInput = new TextInputBuilder()

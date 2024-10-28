@@ -1,6 +1,6 @@
 import {
   __name
-} from "../../chunk-GZWC6LYU.js";
+} from "../../chunk-H736K5TN.js";
 
 // src/commands/General/createWhitelistButton.ts
 import { ButtonKit } from "commandkit";
