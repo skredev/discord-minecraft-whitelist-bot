@@ -4,10 +4,10 @@ Discord Minecraft Whitelist Bot
 
 <div align="center">
 
-![Stars](https://img.shields.io/github/stars/skredev/minecraft-whitelist-bot?logo=github&style=flat)
-![Version](https://img.shields.io/github/package-json/v/skredev/minecraft-whitelist-bot?logo=git&logoColor=white&style=flat)
-![GitHub last commit (branch)](https://img.shields.io/github/last-commit/skredev/minecraft-whitelist-bot/main?logo=git&logoColor=white&style=flat)
-![License](https://img.shields.io/github/license/skredev/minecraft-whitelist-bot?logoColor=white&style=flat)
+![Stars](https://img.shields.io/github/stars/skredev/discord-minecraft-whitelist-bot?logo=github&style=flat)
+![Version](https://img.shields.io/github/package-json/v/skredev/discord-minecraft-whitelist-bot?logo=git&logoColor=white&style=flat)
+![GitHub last commit (branch)](https://img.shields.io/github/last-commit/skredev/discord-minecraft-whitelist-bot/main?logo=git&logoColor=white&style=flat)
+![License](https://img.shields.io/github/license/skredev/discord-minecraft-whitelist-bot?logoColor=white&style=flat)
 
 </div>
 
@@ -24,7 +24,7 @@ This Discord bot allows users to whitelist themselves on a Minecraft server thro
 ### 1. Clone the Repository 
 
 ```bash
-git clone https://github.com/skredev/minecraft-whitelist-bot.git
+git clone https://github.com/skredev/discord-minecraft-whitelist-bot.git
 cd minecraft-whitelist-bot
 ```
     
@@ -68,6 +68,6 @@ We welcome and appreciate any contributions!
 
 ### Our Contributors ✨
 
-<a href="https://github.com/skredev/minecraft-whitelist-bot/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=skredev/minecraft-whitelist-bot" />
+<a href="https://github.com/skredev/discord-minecraft-whitelist-bot/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=skredev/discord-minecraft-whitelist-bot" />
 </a>
