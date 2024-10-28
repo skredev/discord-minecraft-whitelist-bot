@@ -14,7 +14,15 @@ export default async function (interaction: Interaction) {
   const { RCON_IP, RCON_PORT, RCON_PASSWORD, WHITELIST_ROLE_ID } = process.env;
 
   if (!RCON_IP || !RCON_PORT || !RCON_PASSWORD) {
-    console.error("RCON environment variables are missing");
+    console.error("Error: RCON environment variables are missing");
+    return;
+  }
+
+  if (
+    WHITELIST_ROLE_ID &&
+    !interaction.guild.members.me?.permissions.has("ManageRoles")
+  ) {
+    console.error("Error: Bot lacks permissions to manage the whitelist role");
     return;
   }
 
@@ -57,7 +65,7 @@ export default async function (interaction: Interaction) {
               await member.roles.add(whitelistRole);
               console.log("Added role to user: " + member.displayName);
             } catch (error) {
-              console.error("Error adding role:", error);
+              console.error("Error: Problem with adding role:", error);
               await interaction.reply(
                 "There was an error adding the role. Please try again later."
               );
@@ -76,7 +84,7 @@ export default async function (interaction: Interaction) {
         console.log("Unbekannte Antwort vom Server: ", response);
       }
     } catch (error) {
-      console.error("Error sending the command: ", error);
+      console.error("Error: Problem with sending the command: ", error);
     } finally {
       rcon.end();
     }
