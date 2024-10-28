@@ -10,7 +10,7 @@ export const data: CommandData = {
 };
 
 export const run = ({ interaction }: SlashCommandProps) => {
-  interaction.reply('Pong!');
+  interaction.reply('leck sip');
 };
 
 export const options: CommandOptions = {
