@@ -56,7 +56,7 @@ export async function run({ interaction, client, handler }: SlashCommandProps) {
   });
 
   await interaction.reply({
-    content: "Successful creation of the whitelist button",
+    content: "``Whitelist button created successfully`` \u2705",
     ephemeral: true,
   });
 }
