@@ -5,7 +5,8 @@
   "scripts": {
     "dev": "commandkit dev",
     "build": "commandkit build",
-    "start": "commandkit start"
+    "start": "commandkit start",
+    "knip": "knip"
   },
   "keywords": [],
   "author": "",
@@ -15,7 +16,11 @@
     "commandkit": "^0.1.10",
     "discord.js": "^14.16.3",
     "dotenv": "^16.4.5",
-    "minecraft-player": "^1.0.1",
     "rcon-client": "^4.2.5"
+  },
+  "devDependencies": {
+    "@types/node": "^22.8.1",
+    "knip": "^5.34.1",
+    "typescript": "^5.6.3"
   }
 }
