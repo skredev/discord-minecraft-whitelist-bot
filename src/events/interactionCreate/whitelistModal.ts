@@ -1,9 +1,11 @@
+import 'dotenv/config';
+
 import type { Interaction } from "discord.js";
 import minecraftPlayer from "minecraft-player";
 import { promises as fs } from "fs";
 import { join } from "path";
 
-const whitelistPath = join(__dirname, "../../whitelist.json");
+const whitelistPath = join(__dirname, `${process.env.WHITELIST_PATH}`);
 
 export default async function (interaction: Interaction) {
   if (!interaction.isModalSubmit()) return;
@@ -22,6 +24,7 @@ export default async function (interaction: Interaction) {
       "Fehler beim Abrufen des Minecraft-Spielers: ",
       usernameInput
     );
+    console.log(whitelistPath)
     interaction.reply(
       "Fehler beim Abrufen des Minecraft-Spielers: " +
         usernameInput +

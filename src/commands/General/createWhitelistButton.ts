@@ -2,6 +2,8 @@ import { ButtonKit } from "commandkit";
 import {
   ButtonStyle,
   ActionRowBuilder,
+  EmbedBuilder,
+  SlashCommandBuilder,
 } from "discord.js";
 
 import type {
@@ -10,12 +12,35 @@ import type {
   CommandOptions,
 } from "commandkit";
 
-export const data: CommandData = {
-  name: "createbutton",
-  description: "Create the whitelist Button",
-};
+export const data = new SlashCommandBuilder()
+  .setName("createbutton")
+  .setDescription("Create the whitelist Button")
+  .addStringOption((option) =>
+    option
+      .setName("title")
+      .setDescription("Title displayed in the embed")
+      .setRequired(true)
+  )
+  .addStringOption((option) =>
+    option
+      .setName("description")
+      .setDescription("Description displayed in the embed")
+  );
 
 export async function run({ interaction, client, handler }: SlashCommandProps) {
+  const Embed = new EmbedBuilder()
+    .setColor("#b9d7d7")
+    .setTitle(
+      client.user.displayName + " " + interaction.options.getString("title")
+    )
+    .setAuthor({
+      name: client.user.displayName,
+      iconURL: client.user.displayAvatarURL(),
+    })
+    .setDescription(interaction.options.getString("description") ?? "")
+    .setThumbnail(client.user.displayAvatarURL())
+    .setFooter({ text: "Minecraft Whitelist Bot" });
+
   const button = new ButtonKit()
     .setEmoji("📝")
     .setStyle(ButtonStyle.Success)
@@ -25,8 +50,9 @@ export async function run({ interaction, client, handler }: SlashCommandProps) {
 
   if (!interaction.channel?.isSendable || interaction.channel.isDMBased())
     return;
+
   const message = await interaction.channel.send({
-    content: "Whitelist:",
+    embeds: [Embed],
     components: [buttonRow],
   });
 }
