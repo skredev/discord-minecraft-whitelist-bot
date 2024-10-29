@@ -28,17 +28,13 @@ export const data = new SlashCommandBuilder()
 
 export async function run({ interaction, client, handler }: SlashCommandProps) {
   const Embed = new EmbedBuilder()
-    .setColor("#b9d7d7")
+    .setColor("#2b2d31")
     .setTitle(
-      client.user.displayName + " " + interaction.options.getString("title")
+      interaction.options.getString("title")
     )
-    .setAuthor({
-      name: client.user.displayName,
-      iconURL: client.user.displayAvatarURL(),
-    })
     .setDescription(interaction.options.getString("description") ?? "")
     .setThumbnail(client.user.displayAvatarURL())
-    .setFooter({ text: "Minecraft Whitelist Bot" });
+    .setFooter({ text: "Discord Minecraft Whitelist Bot", iconURL: client.user.displayAvatarURL() });
 
   const button = new ButtonKit()
     .setEmoji("📝")
