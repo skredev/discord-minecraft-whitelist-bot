@@ -1,4 +1,4 @@
-<h1 align="center">
+<h3 align="center">
 Discord Minecraft Whitelist Bot
 </h1>
 
@@ -10,6 +10,8 @@ Discord Minecraft Whitelist Bot
 ![License](https://img.shields.io/github/license/skredev/discord-minecraft-whitelist-bot?logoColor=white&style=flat)
 
 </div>
+
+---
 
 This Discord bot allows users to whitelist themselves on a Minecraft server through a simple interaction.
 
@@ -61,13 +63,3 @@ WHITELIST_ROLE_ID=""
 ```bash
 pnpm run dev
 ```
-
-## Contributing
-
-We welcome and appreciate any contributions!
-
-### Our Contributors ✨
-
-<a href="https://github.com/skredev/discord-minecraft-whitelist-bot/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=skredev/discord-minecraft-whitelist-bot" />
-</a>
