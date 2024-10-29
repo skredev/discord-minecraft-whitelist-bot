@@ -2,6 +2,8 @@
 Discord Minecraft Whitelist Bot
 </h1>
 
+![hero](https://github.com/skredev/discord-minecraft-whitelist-bot/blob/main/public/preview.jpg)
+
 <div align="center">
 
 ![Stars](https://img.shields.io/github/stars/skredev/discord-minecraft-whitelist-bot?logo=github&style=flat)
