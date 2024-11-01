@@ -19,8 +19,8 @@ This Discord bot allows users to whitelist themselves on a Minecraft server thro
 
 ## Features
 
-- **Create Whitelist Button:** Use the /create-whitelist-button command to generate a button for whitelisting users.
-- **Interactive Modal:** Clicking the whitelist button opens a modal where users can enter their Minecraft username.
+- **Create Whitelist Button:** Use the /create-whitelist-button command to create an embed and button.
+- **Interactive Modal:** A modal will open for users to enter their Minecraft username.
 - **Role Management:** Automatically adds a designated role to users upon successful whitelisting.
 
 ## Installation
@@ -58,7 +58,7 @@ WHITELIST_ROLE_ID=""
 - **RCON_PASSWORD:** The password for RCON access.
 - **WHITELIST_ROLE_ID:** The role ID for the whitelist role to be added to users. This is **optional**.
   
-> You must first enable RCON in the server.properties file of your Minecraft Server and set a password
+> First, enable RCON in your Minecraft server's server.properties file and set a password.
 
 ### 4. Run the Bot
    
