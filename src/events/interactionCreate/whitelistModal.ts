@@ -12,25 +12,13 @@ async function getRconClient(): Promise<Rcon> {
     throw new Error("RCON environment variables are missing");
   }
 
-  if (!rconClient) {
-    rconClient = await Rcon.connect({
-      host: RCON_IP,
-      port: Number(RCON_PORT),
-      password: RCON_PASSWORD,
-    });
-    console.info("New RCON connection established.");
-  } else {
-    try {
-      await rconClient.send("list");
-    } catch {
-      rconClient = await Rcon.connect({
-        host: RCON_IP,
-        port: Number(RCON_PORT),
-        password: RCON_PASSWORD,
-      });
-      console.info("RCON connection re-established.");
-    }
-  }
+  rconClient = await Rcon.connect({
+    host: RCON_IP,
+    port: Number(RCON_PORT),
+    password: RCON_PASSWORD,
+  });
+
+  console.info("New RCON connection established.");
 
   return rconClient;
 }
@@ -43,12 +31,7 @@ export default async function (interaction: Interaction) {
   )
     return;
 
-  const { RCON_IP, RCON_PORT, RCON_PASSWORD, WHITELIST_ROLE_ID } = process.env;
-
-  if (!RCON_IP || !RCON_PORT || !RCON_PASSWORD) {
-    console.error("RCON environment variables are missing");
-    return;
-  }
+  const { WHITELIST_ROLE_ID } = process.env;
 
   if (
     WHITELIST_ROLE_ID &&
