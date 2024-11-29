@@ -16,6 +16,7 @@ async function getRconClient(): Promise<Rcon> {
     host: RCON_IP,
     port: Number(RCON_PORT),
     password: RCON_PASSWORD,
+    timeout: 5000,
   });
 
   console.info("New RCON connection established.");
